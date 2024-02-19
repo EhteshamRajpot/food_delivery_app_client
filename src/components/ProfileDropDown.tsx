@@ -16,8 +16,7 @@ const ProfileDropDown = () => {
         if (!loading && user !== undefined) {
             setsignedIn(!!user)
         }
-    }, [loading, user])
-    console.log("Sign In", signedIn)
+    }, [loading, user]) 
 
     const logoutHandler = () => {
         Cookies.remove("access_token")
