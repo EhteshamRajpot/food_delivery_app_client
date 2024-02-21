@@ -13,6 +13,8 @@
     "@hookform/resolvers": "^3.3.4",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.9.1",
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "framer-motion": "^11.0.5",
     "graphql": "^16.8.1",
     "js-cookie": "^3.0.5",

@@ -6,23 +6,35 @@ import AuthScreen from "../screens/AuthScreen";
 import useUser from '../hooks/useUser';
 import Cookies from "js-cookie";
 import toast from 'react-hot-toast';
+import { signOut, useSession } from "next-auth/react"
+import { registerUser } from '../actions/register-user';
 
 const ProfileDropDown = () => {
     const [signedIn, setsignedIn] = useState(false);
     const [open, setOpen] = useState(false);
     const { user, loading } = useUser();
+    const { data } = useSession()
 
     useEffect(() => {
-        if (!loading && user !== undefined) {
-            setsignedIn(!!user)
+        if (!loading) {
+            setsignedIn(!!user);
         }
-    }, [loading, user]) 
+        if (data?.user) {
+            setsignedIn(true);
+            addUser(data?.user);
+        }
+    }, [loading, user, open, data]);
+
 
     const logoutHandler = () => {
         Cookies.remove("access_token")
         Cookies.remove("refresh_token")
         toast.success("Log out sucessfully");
         window.location.reload()
+    }
+
+    const addUser = async (user: any) => {
+        await registerUser(user)
     }
     return (
         <div className=''>
@@ -34,14 +46,13 @@ const ProfileDropDown = () => {
                                 as="button"
                                 className="transition-transform"
                                 // src="https://avatars.githubusercontent.com/u/87035691?v=4"
-                                // src={data?.user ? data.user.image : user.image}
-                                src={user?.avatar?.url}
+                                src={data?.user ? data?.user?.image : user?.image}
                             />
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Profile Actions" variant="flat">
                             <DropdownItem key="profile" className="h-14 gap-2">
                                 <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">{user?.email}</p>
+                                <p className="font-semibold">{data?.user ? data?.user?.email : user?.email}</p>
                             </DropdownItem>
                             <DropdownItem key="settings">
                                 My Profile
@@ -53,7 +64,7 @@ const ProfileDropDown = () => {
                             <DropdownItem
                                 key="logout"
                                 color="danger"
-                                onClick={() => logoutHandler()}
+                                onClick={() => signOut() || logoutHandler}
                             >
                                 Log Out
                             </DropdownItem>

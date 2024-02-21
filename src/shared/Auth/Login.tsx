@@ -27,7 +27,6 @@ const Login = ({ setActiveState, setOpen }: { setActiveState: (e: string) => voi
     const [show, setShow] = useState(false)
 
     const onSubmit = async (data: LoginSchema) => {
-        console.log("URL is here", process.env.NEXTAUTH_URL)
         try {
             const loginData = {
                 email: data.email,
