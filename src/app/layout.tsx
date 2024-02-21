@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers/NextProvider";
+import { Providers } from "./providers/NextUiProvider";
 import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({

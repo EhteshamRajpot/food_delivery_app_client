@@ -9,6 +9,7 @@ import { AiFillGithub, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/a
 import { FcGoogle } from "react-icons/fc";
 import { z } from "zod";
 import Cookies from "js-cookie";
+import { signIn } from "next-auth/react"
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -26,6 +27,7 @@ const Login = ({ setActiveState, setOpen }: { setActiveState: (e: string) => voi
     const [show, setShow] = useState(false)
 
     const onSubmit = async (data: LoginSchema) => {
+        console.log("URL is here", process.env.NEXTAUTH_URL)
         try {
             const loginData = {
                 email: data.email,
@@ -110,7 +112,9 @@ const Login = ({ setActiveState, setOpen }: { setActiveState: (e: string) => voi
                 <h5 className="text-center pt-4 font-poppins text-[14px] text-white">
                     Or join with
                 </h5>
-                <div className='flex items-center justify-center my-3'>
+                <div className='flex items-center justify-center my-3'
+                    onClick={() => signIn()}
+                >
                     <FcGoogle size={30} className="cursor-pointer mr-2" />
                     <AiFillGithub size={30} className="cursor-pointer mr-1" />
                 </div>

@@ -49,7 +49,7 @@ const Signup = ({ setActiveState }: { setActiveState: (e: string) => void }) => 
     } catch (error: any) {
       toast.error(error.message)
     }
-  }  
+  }   
   return (
     <div>
       <h1 className={`${styles.title}`}>SignUp with Bite-Buddy</h1>
@@ -130,7 +130,6 @@ const Signup = ({ setActiveState }: { setActiveState: (e: string) => void }) => 
         </h5>
         <div className="flex items-center justify-center my-3">
           <FcGoogle size={30} className="cursor-pointer mr-2" />
-          <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
         <h5 className="text-center font-Poppins text-[14px]">
           Already have an account?
